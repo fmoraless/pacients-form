@@ -46,18 +46,28 @@ const validar = () => {
     return;
   }
   emit('guardar-paciente');
+  alerta.mensaje = 'Paciente agregado correctamente';
+  alerta.tipo = 'exito';
+
+  setTimeout( ()=> {
+    Object.assign(alerta, {
+      mensaje: '',
+      tipo: '',
+    });
+  }, 3000);
 };
 </script>
 
 <template>
   <div class="md:w-1/2">
-    <Alerta v-if="alerta.mensaje" :tipo="alerta" />
+
     <h2 class="font-black text-3xl text-center">Formulario</h2>
 
     <p class="text-lg mt-5 text-center mb-10">
       añade pacientes
       <span class="text-indigo-600 font-bold">Administralos</span>
     </p>
+    <Alerta v-if="alerta.mensaje" :alerta="alerta"/>
     <form
       class="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
       @submit.prevent="validar"
