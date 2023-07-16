@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, computed } from 'vue';
-import Alerta from './Alerta.vue';
+import Alerta from './TheAlerta.vue';
 
 const alerta = reactive({
   tipo: '',

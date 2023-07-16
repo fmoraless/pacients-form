@@ -1,9 +1,9 @@
 <script setup>
 import { ref, reactive, watch, onMounted } from 'vue';
 import { uid } from 'uid';
-import Header from './components/Header.vue';
-import Formulario from './components/Formulario.vue';
-import Paciente from './components/Paciente.vue';
+import Header from './components/TheHeader.vue';
+import Formulario from './components/FormularioPaciente.vue';
+import Paciente from './components/ThePaciente.vue';
 
 const pacientes = ref([]);
 
