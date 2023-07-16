@@ -1,14 +1,15 @@
 <script setup>
-import { computed } from "vue";
+import { computed } from 'vue';
 const props = defineProps({
   alerta: {
     type: Object,
     required: true,
+
   },
 });
 
 const isError = computed(() => {
-  return props.alerta.tipo === "error";
+  return props.alerta.tipo === 'error';
 });
 </script>
 
