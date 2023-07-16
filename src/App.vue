@@ -8,6 +8,7 @@ import Paciente from './components/Paciente.vue';
 const pacientes = ref([]);
 
 const paciente = reactive({
+  id: null,
   nombre: 'Firulais',
   propietario: 'Francisco',
   email: 'francisco@mail.com',
