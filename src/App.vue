@@ -1,20 +1,30 @@
 <script setup>
 import { ref, reactive } from 'vue';
+import { uid } from 'uid';
 import Header from './components/Header.vue';
 import Formulario from './components/Formulario.vue';
+import Paciente from './components/Paciente.vue';
 
 const pacientes = ref([]);
 
 const paciente = reactive({
-  nombre: '',
-  propietario: '',
-  email: '',
-  alta: '',
-  sintomas: '',
+  nombre: 'Firulais',
+  propietario: 'Francisco',
+  email: 'francisco@mail.com',
+  alta: '08-08-2021',
+  sintomas: 'tiene fiebre, no quiere comer',
 });
 
 const guardarPaciente = () => {
-  pacientes.value.push();
+  pacientes.value.push({
+    ...paciente,
+    id: uid(),
+  });
+  paciente.nombre = '';
+  paciente.propietario = '';
+  paciente.email = '';
+  paciente.alta = '';
+  paciente.sintomas = '';
 };
 
 </script>
@@ -35,7 +45,17 @@ const guardarPaciente = () => {
         <h3 class="font-black text-3xl text-center">
           Administra tus pacientes
         </h3>
-        <div v-if="pacientes.length > 0"></div>
+        <div v-if="pacientes.length > 0">
+          <p class="text-lg mt-5 text-center mb-10">
+            Información de
+            <span class="text-indigo-600 font-bold">Pacientes</span>
+          </p>
+          <Paciente
+            v-for="paciente in pacientes"
+            :key="paciente.id"
+            :paciente="paciente"
+          />
+        </div>
         <p v-else class="mt-10 text-2xl text-center">No hay</p>
       </div>
     </div>
