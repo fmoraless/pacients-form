@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, computed } from 'vue';
-import Alerta from './TheAlerta.vue';
+import TheAlerta from './TheAlerta.vue';
 
 const alerta = reactive({
   tipo: '',
@@ -75,12 +75,12 @@ const editando = computed(() => {
       añade pacientes
       <span class="text-indigo-600 font-bold">Administralos</span>
     </p>
-    <Alerta v-if="alerta.mensaje" :alerta="alerta"/>
+    <the-alerta v-if="alerta.mensaje" :alerta="alerta"></the-alerta>
     <form
       class="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
       @submit.prevent="validar"
     >
-      <div mb-5>
+      <div class="mb-5">
         <label for="mascota" class="block text-gray-700 upercase font-bold">
           Nombre Mascota
         </label>
@@ -93,7 +93,7 @@ const editando = computed(() => {
           @input="$emit('update:nombre', $event.target.value)"
         />
       </div>
-      <div mb-5>
+      <div class="mb-5">
         <label for="propietario" class="block text-gray-700 upercase font-bold">
           Nombre propierario
         </label>
@@ -106,7 +106,7 @@ const editando = computed(() => {
           @input="$emit('update:propietario', $event.target.value)"
         />
       </div>
-      <div mb-5>
+      <div class="mb-5">
         <label for="email" class="block text-gray-700 upercase font-bold">
           Email propierario
         </label>
@@ -119,7 +119,7 @@ const editando = computed(() => {
           @input="$emit('update:email', $event.target.value)"
         />
       </div>
-      <div mb-5>
+      <div class="mb-5">
         <label for="alta" class="block text-gray-700 upercase font-bold">
           Alta
         </label>
@@ -131,7 +131,7 @@ const editando = computed(() => {
           @input="$emit('update:alta', $event.target.value)"
         />
       </div>
-      <div mb-5>
+      <div class="mb-5">
         <label for="sintomas" class="block text-gray-700 upercase font-bold">
           Sintomas
         </label>
