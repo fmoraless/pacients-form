@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, watch, onMounted } from 'vue';
 import { uid } from 'uid';
 import Header from './components/Header.vue';
 import Formulario from './components/Formulario.vue';
@@ -9,18 +9,34 @@ const pacientes = ref([]);
 
 const paciente = reactive({
   id: null,
-  nombre: 'Firulais',
-  propietario: 'Francisco',
-  email: 'francisco@mail.com',
-  alta: '08-08-2021',
-  sintomas: 'tiene fiebre, no quiere comer',
+  nombre: '',
+  propietario: '',
+  email: '',
+  alta: '',
+  sintomas: '',
+});
+
+watch(pacientes, () => {
+  guardarLocalStorate();
+}, {
+  deep: true,
+});
+const guardarLocalStorate = () => {
+  localStorage.setItem('pacientes', JSON.stringify(pacientes.value));
+};
+
+onMounted( ()=> {
+  const pacientesStorage = localStorage.getItem('pacientes');
+  if(pacientesStorage) {
+    pacientes.value = JSON.parse(pacientesStorage);
+  }
 });
 
 const guardarPaciente = () => {
   if(paciente.id) {
     console.log('Edicion');
     const {id } = paciente;
-    const i = pacientes.value.findIndex(pacienteState => pacienteState.id === id );
+    const i = pacientes.value.findIndex(paciente => paciente.id === id );
     console.log('postPac', i);
     pacientes.value[i] = {...paciente};
 
@@ -49,6 +65,12 @@ const actualizarPaciente = (id) => {
   console.log(pacienteAEditar);
   Object.assign(paciente, pacienteAEditar);
 };
+
+const eliminarPaciente = (id) => {
+  console.log('eliminar paciente', id);
+  pacientes.value = pacientes.value.filter(paciente => paciente.id !== id);
+};
+
 
 </script>
 
@@ -80,6 +102,7 @@ const actualizarPaciente = (id) => {
             :key="paciente.id"
             :paciente="paciente"
             @actualizar-paciente="actualizarPaciente"
+            @eliminar-paciente="eliminarPaciente"
           />
         </div>
         <p v-else class="mt-10 text-2xl text-center">No hay</p>
